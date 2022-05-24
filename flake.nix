@@ -14,6 +14,7 @@
     {
       overlay = (final: prev: rec {
         figma-font-helper = final.callPackage ./pkgs/figma-font-helper { };
+        otf-san-francisco = final.callPackage ./pkgs/otf-san-francisco { };
       });
 
       nixosModules.figma-font-helper = import ./modules/figma-font-helper;
