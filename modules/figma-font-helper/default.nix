@@ -33,6 +33,7 @@ in
       unitConfig = {
         Description = "Font Helper for Figma";
         After = [ "graphical-session.target" ];
+        wantedBy = [ "default.target" ];
       };
 
       serviceConfig = {
