@@ -1,12 +1,12 @@
-{ lib, stdenv, fetchzip, ... }:
+{ nixpkgs, lib, ... }:
 
-stdenv.mkDerivation rec {
+nixpkgs.stdenv.mkDerivation rec {
   pname = "apple-cursor-theme";
-  version = "1.2.3";
+  version = "2.0.0";
 
-  src = fetchzip {
-    url = "https://github.com/ful1e5/apple_cursor/releases/download/v${version}/macOSBigSur.tar.gz";
-    sha256 = "sha256-EvIoUq5g6+NynSPEylTj8tDUFEitGjxDw7CrhEgOlV8=";
+  src = nixpkgs.fetchzip {
+    url = "https://github.com/ful1e5/apple_cursor/releases/download/v${version}/macOS-Monterey.tar.gz";
+    sha256 = "sha256-MHmaZs56Q1NbjkecvfcG1zAW85BCZDn5kXmxqVzPc7M=";
   };
 
   installPhase = ''

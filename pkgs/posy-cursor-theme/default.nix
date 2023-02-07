@@ -1,10 +1,10 @@
-{ lib, stdenv, fetchzip, ... }:
+{ self, lib, nixpkgs, ... }:
 
-stdenv.mkDerivation rec {
+nixpkgs.stdenv.mkDerivation rec {
   pname = "posy-cursor-theme";
   version = "1.4";
 
-  src = fetchzip {
+  src = nixpkgs.fetchzip {
     url = "https://github.com/simtrami/posy-improved-cursor-linux/archive/refs/tags/${version}.tar.gz";
     sha256 = "sha256-EvIoUq5g6+NynSPEylTj8tDUFEitGjxDw7CrhEgOlV8=";
   };

@@ -1,15 +1,13 @@
 { lib
-, pkgs
-, fetchFromGitHub
-, rustPlatform
-, perf-tools
+, nixpkgs
+, self
 }:
 
-rustPlatform.buildRustPackage rec {
+nixpkgs.rustPlatform.buildRustPackage rec {
   pname = "system76-scheduler";
   version = "1.2.1";
 
-  src = fetchFromGitHub {
+  src = nixpkgs.fetchFromGitHub {
     rev = "${version}";
     owner = "pop-os";
     repo = "system76-scheduler";
@@ -18,9 +16,9 @@ rustPlatform.buildRustPackage rec {
 
   cargoSha256 = "sha256-ZbAEeHKALp0S0RwcJOINyp7uueWnXny4Crkl+qEEKyQ=";
 
-  EXECSNOOP_PATH = "${lib.makeBinPath [ perf-tools ]}/execsnoop";
+  EXECSNOOP_PATH = "${lib.makeBinPath [ nixpkgs.perf-tools ]}/execsnoop";
 
-  buildInputs = [ perf-tools ];
+  buildInputs = [ nixpkgs.perf-tools ];
 
   postPatch = ''
     substituteInPlace "daemon/src/config.rs" \
