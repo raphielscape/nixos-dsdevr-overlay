@@ -1,4 +1,9 @@
-{ lib, pkgs, fetchFromGitHub, rustPlatform, perf-tools }:
+{ lib
+, pkgs
+, fetchFromGitHub
+, rustPlatform
+, perf-tools
+}:
 
 rustPlatform.buildRustPackage rec {
   pname = "system76-scheduler";
