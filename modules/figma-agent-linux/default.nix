@@ -14,17 +14,27 @@ in
   };
 
   config = mkIf (cfg.enable && stdenv.isLinux) {
-    systemd.services.figma-agent-linux = {
+    systemd.user.services.figma-agent = {
       wantedBy = [ "default.target" ];
       unitConfig = {
         Description = "Figma Agent for Linux";
-        After = [ "graphical-session.target" ];
+        Wants = [ "network-online.target" ];
+        After = [ "network-online.target" ];
       };
 
       serviceConfig = {
-        Type = "simple";
+        Type = "exec";
         ExecStart = "${pkgs.figma-agent-linux}/bin/figma-agent";
-        Restart = "on-failure";
+      };
+    };
+
+    systemd.user.sockets.figma-agent = {
+      wantedBy = [ "sockets.target" ];
+      unitConfig = {
+        Description = "Figma Agent for Linux";
+      };
+      socketConfig = {
+        ListenStream = 18412;
       };
     };
   };
