@@ -1,13 +1,18 @@
 { lib
-, nixpkgs
+, rustPlatform
+, fetchFromGitHub
+, pkg-config
+, llvmPackages_12
+, freetype
+, fontconfig
 , ...
 }:
 
-nixpkgs.rustPlatform.buildRustPackage {
+rustPlatform.buildRustPackage {
   pname = "figma-agent-linux";
   version = "0.2.5";
 
-  src = nixpkgs.fetchFromGitHub {
+  src = fetchFromGitHub {
     rev = "7f440e7a70e2de30c51b97bdcb5e7dd189311655";
     owner = "neetly";
     repo = "figma-agent-linux";
@@ -17,13 +22,13 @@ nixpkgs.rustPlatform.buildRustPackage {
   cargoSha256 = "sha256-AxTiCUq13z/P6eNy/Wr3rku95APJwLFwncEQrZqJYFQ=";
 
   nativeBuildInputs = [
-    nixpkgs.pkg-config
-    nixpkgs.llvmPackages_12.libclang.lib
-    nixpkgs.llvmPackages_12.clang
+    pkg-config
+    llvmPackages_12.libclang.lib
+    llvmPackages_12.clang
   ];
-  buildInputs = [ nixpkgs.freetype nixpkgs.fontconfig ];
+  buildInputs = [ freetype fontconfig ];
 
-  LIBCLANG_PATH = "${nixpkgs.llvmPackages_12.libclang.lib}/lib";
+  LIBCLANG_PATH = "${llvmPackages_12.libclang.lib}/lib";
 
   meta = with lib; {
     homepage = "https://github.com/neetly/figma-agent-linux";

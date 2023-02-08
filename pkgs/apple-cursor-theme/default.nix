@@ -1,10 +1,14 @@
-{ nixpkgs, lib, ... }:
+{ stdenv
+, lib
+, fetchzip
+, ...
+}:
 
-nixpkgs.stdenv.mkDerivation rec {
+stdenv.mkDerivation rec {
   pname = "apple-cursor-theme";
   version = "2.0.0";
 
-  src = nixpkgs.fetchzip {
+  src = fetchzip {
     url = "https://github.com/ful1e5/apple_cursor/releases/download/v${version}/macOS-Monterey.tar.gz";
     sha256 = "sha256-MHmaZs56Q1NbjkecvfcG1zAW85BCZDn5kXmxqVzPc7M=";
   };

@@ -1,22 +1,28 @@
-{ nixpkgs, lib, ... }:
+{ stdenv
+, lib
+, fetchurl
+, unzip
+, libarchive
+, ...
+}:
 
-nixpkgs.stdenv.mkDerivation rec {
-  name = "otf-san-francisco";
+stdenv.mkDerivation rec {
+  name = "sf-pro";
 
-  otf-san-francisco = nixpkgs.fetchurl {
-    name = "otf-san-francisco";
+  sf-pro = fetchurl {
+    name = "sf-pro";
     url = "https://developer.apple.com/fonts/downloads/SFPro.zip";
     sha512 = "7001638787c7580a7cd1c40d92af8c680187ebfad832fe0ec4e97ccc15d925a9928e97b1e5bfd39db1789eb955bf0fcbb954a990b2ef2b56b41da7a13a6bd6cd";
   };
 
-  buildInputs = [ nixpkgs.unzip nixpkgs.libarchive ];
+  buildInputs = [ unzip libarchive ];
 
   sourceRoot = ".";
 
   phases = [ "unpackPhase" "installPhase" ];
 
   unpackPhase = ''
-    unzip -j ${otf-san-francisco}
+    unzip -j ${sf-pro}
     bsdtar xvPf 'San Francisco Pro.pkg' || true
     bsdtar xvPf 'San Francisco Pro.pkg/Payload'
   '';
