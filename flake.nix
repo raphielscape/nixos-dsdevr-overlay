@@ -47,6 +47,7 @@
 
           themes = _: prev: {
             gradience = prev.callPackage ./pkgs/gradience { };
+            material-color-utilities = prev.callPackage ./pkgs/material-color-utilities { };
           };
 
           darwin = final: prev: with self.overlays;
