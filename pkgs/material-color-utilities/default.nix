@@ -1,23 +1,20 @@
 { stdenv
 , lib
-, buildPythonPackage
-, fetchPypi
-, pillow
-, regex
+, python3Packages
 }:
 
-buildPythonPackage rec {
+python3Packages.buildPythonPackage rec {
   pname = "material-color-utilities-python";
   version = "0.1.5";
 
-  src = fetchPypi {
+  src = python3Packages.fetchPypi {
     inherit pname version;
     sha256 = "sha256-PG8C585wWViFRHve83z3b9NijHyV+iGY2BdMJpyVH64=";
   };
 
   propagatedBuildInputs = [
-    pillow
-    regex
+    python3Packages.pillow
+    python3Packages.regex
   ];
 
   # No tests implemented.
