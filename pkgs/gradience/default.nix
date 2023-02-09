@@ -60,7 +60,7 @@ python3Packages.buildPythonApplication rec {
     anyascii
     jinja2
     lxml
-    ../material-color-utilities
+    (callPackage ../material-color-utilities { })
     pygobject3
     svglib
     Yapsy
