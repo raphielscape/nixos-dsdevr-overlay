@@ -45,6 +45,10 @@
               prev.callPackage ./pkgs/apple-cursor-theme { };
           };
 
+          themes = _: prev: {
+            gradience = prev.callPackage ./pkgs/gradience { };
+          };
+
           darwin = final: prev: with self.overlays;
             (fonts final prev);
 
@@ -52,7 +56,8 @@
             (applications final prev)
             // (designkit final prev)
             // (fonts final prev)
-            // (cursors final prev);
+            // (cursors final prev)
+            // (themes final prev);
 
           default = self.overlays.linux;
         };
